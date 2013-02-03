@@ -2,9 +2,10 @@
 
 ###ENGLISH
 
-ImgurDownloader is a Python script for downloading albums from imgur.com
+ImgurDownloader is a Python script for downloading albums from Imgur.
 
 Usage:
+
 ~$ ./ImgurDownloader.py [album URL] [destination folder]
 
 Example:
@@ -18,9 +19,11 @@ If the destination folder is not provided the script will create a folder with t
 ImgurDownloader es un script para descargar automáticamente albumes de Imgur.
 
 Modo de uso:
+
 ~$ ./ImgurDownloader.py [URL del album] [Ruta a carpeta de destino]
 
 Ejemplo:
+
 ~$ ./ImgurDownloader.py http://imgur.com/a/LXS9b /home/jorge/fotos
 
 Si se omite la carpeta de destino se creará una carpeta con el mismo nombre
