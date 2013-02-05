@@ -65,6 +65,7 @@ class ImgurDownloader():
                 urllib.urlretrieve(image[0], path)
             except IOError:
                 print 'Error al descargar el archivo %s, probando de nuevo.\n' % (image[0])
+                urllib.urlretrieve(image[0], path)
         print "\nAlbum %s descargado" % self.albumUrl
 
 
