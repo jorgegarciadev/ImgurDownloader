@@ -27,7 +27,7 @@ class DownloaderError(Exception):
 class ImgurDownloader():
     def __init__(self, albumUrl):
         self.albumUrl = albumUrl
-        
+
         pattern = "http://(www\.)?imgur\.com/a/(\w+)(#\w+)?"
 
         match = re.match(pattern, albumUrl)
@@ -61,8 +61,10 @@ class ImgurDownloader():
             print "Descargando imagen %d de %d: %s" % (index+1,len(self.images),image[0])
             prefix = "%s-" % (str(index).zfill(int(math.log(len(self.images),10))+1))
             path = os.path.join(albumFolder, prefix + image[1])
-            urllib.urlretrieve(image[0], path)
-            
+            try:
+                urllib.urlretrieve(image[0], path)
+            except IOError:
+                print 'Error al descargar el archivo %s, probando de nuevo.\n' % (image[0])
         print "\nAlbum %s descargado" % self.albumUrl
 
 
