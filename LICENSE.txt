@@ -1,3 +1,5 @@
+ImgurDownloader - Python script for downloading albums from Imgur.
+
 Copyright (c) 2013 Jorge García
 
 https://github.com/jorgegarciadev
