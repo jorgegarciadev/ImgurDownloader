@@ -58,7 +58,7 @@ class ImgurDownloader():
             os.makedirs(albumFolder)
 
         for (index, image) in enumerate(self.images):
-            print "Descargando imagen %d de %d: %s" % (index+1,len(self.images),image[0])
+            print "Descargando imagen %d de %d: %s" % (index+1,len(self.images),"http:"+image[0])
             prefix = "%s-" % (str(index).zfill(int(math.log(len(self.images),10))+1))
             path = os.path.join(albumFolder, prefix + image[1])
             try:
