@@ -45,7 +45,7 @@ class ImgurDownloader():
     def SaveImages(self, destinationFolder = False):
 
         html = self.response.read()
-        pattern = '<img src="(http://i\.imgur\.com/((\w+)\.(png|jpg|jpeg|gif)))"'
+        pattern = '<img src="(//i\.imgur\.com/((\w+)\.(png|jpg|jpeg|gif)))"'
         self.images = re.findall(pattern, html)
         print '\n%d Imágenes encontradas.\n' % len(self.images)
 
@@ -62,7 +62,7 @@ class ImgurDownloader():
             prefix = "%s-" % (str(index).zfill(int(math.log(len(self.images),10))+1))
             path = os.path.join(albumFolder, prefix + image[1])
             try:
-                urllib.urlretrieve(image[0], path)
+                urllib.urlretrieve("http:"+image[0], path)
             except IOError:
                 print 'Error al descargar el archivo %s, probando de nuevo.\n' % (image[0])
                 urllib.urlretrieve(image[0], path)
