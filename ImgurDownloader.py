@@ -36,7 +36,7 @@ class ImgurDownloader():
 
         self.albumId = match.group(2)
 
-        imgurAlbum = 'http://imgur.com/a/' + self.albumId + '/noscript'
+        imgurAlbum = 'http://imgur.com/a/' + self.albumId
         self.response = urllib.urlopen(imgurAlbum)
 
         if self.response.getcode() != 200:
