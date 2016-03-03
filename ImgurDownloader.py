@@ -45,9 +45,14 @@ class ImgurDownloader():
     def SaveImages(self, destinationFolder = False):
 
         html = self.response.read()
-        pattern = '<img src="(//i\.imgur\.com/((\w+)\.(png|jpg|jpeg|gif)))"'
-        self.images = re.findall(pattern, html)
-        print '\n%d Imágenes encontradas.\n' % len(self.images)
+        #pattern = '<img src="(//i\.imgur\.com/((\w+)\.(png|jpg|jpeg|gif)))"'
+        pattern_hash = '\{"hash":"(\w+)"'
+        pattern_ext = '"ext":"(.jpg|.png|.gif|.jpeg)"'
+        self.hashes = re.findall(pattern_hash, html)
+        self.exts = re.findall(pattern_ext, html)
+
+
+        print '\n%d Imágenes encontradas.\n' % len(self.hashes)
 
         if destinationFolder:
             albumFolder = destinationFolder
@@ -57,14 +62,14 @@ class ImgurDownloader():
         if not os.path.exists(albumFolder):
             os.makedirs(albumFolder)
 
-        for (index, image) in enumerate(self.images):
-            print "Descargando imagen %d de %d: %s" % (index+1,len(self.images),"http:"+image[0])
-            prefix = "%s-" % (str(index).zfill(int(math.log(len(self.images),10))+1))
-            path = os.path.join(albumFolder, prefix + image[1])
+        for (index, hash) in enumerate(self.hashes):
+            print "Descargando imagen %d de %d: %s" % (index+1,len(self.hashes), hash + self.exts[index])
+            prefix = "%s-" % (str(index).zfill(int(math.log(len(self.hashes),10))+1))
+            path = os.path.join(albumFolder, prefix + hash + self.exts[index])
             try:
-                urllib.urlretrieve("http:"+image[0], path)
+                urllib.urlretrieve("http://i.imgur.com/"+ hash + self.exts[index], path)
             except IOError:
-                print 'Error al descargar el archivo %s, probando de nuevo.\n' % (image[0])
+                print 'Error al descargar el archivo %s, probando de nuevo.\n' % (hash + self.exts[index])
                 urllib.urlretrieve(image[0], path)
         print "\nAlbum %s descargado" % self.albumUrl
 
