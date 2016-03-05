@@ -47,9 +47,11 @@ class ImgurDownloader():
         html = self.response.read()
         #pattern = '<img src="(//i\.imgur\.com/((\w+)\.(png|jpg|jpeg|gif)))"'
         pattern_hash = '\{"hash":"(\w+)"'
-        pattern_ext = '"ext":"(.jpg|.png|.gif|.jpeg)"'
+        pattern_ext = '"ext":"(.[\w?]{3,5})"'
         self.hashes = re.findall(pattern_hash, html)
         self.exts = re.findall(pattern_ext, html)
+        print(len(self.hashes))
+        print(len(self.exts))
 
 
         print '\n%d Imágenes encontradas.\n' % len(self.hashes)
