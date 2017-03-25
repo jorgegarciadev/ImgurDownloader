@@ -28,15 +28,15 @@ class ImgurDownloader():
     def __init__(self, albumUrl):
         self.albumUrl = albumUrl
 
-        pattern = "http://(www\.)?imgur\.com/a/(\w+)(#\w+)?"
+        pattern = "http(s)?://(www\.)?imgur\.com/a/(\w+)(#\w+)?"
 
         match = re.match(pattern, albumUrl)
         if not match:
             raise DownloaderError('\nLa dirección no es correcta.')
 
-        self.albumId = match.group(2)
+        self.albumId = match.group(3)
 
-        imgurAlbum = 'http://imgur.com/a/' + self.albumId
+        imgurAlbum = 'https://imgur.com/a/' + self.albumId
         self.response = urllib.urlopen(imgurAlbum)
 
         if self.response.getcode() != 200:
